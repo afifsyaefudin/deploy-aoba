@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for
 import pickle
+import os
 
 classifier = pickle.load(open('Apps_Classification.pkl', 'rb'))
 cv = pickle.load(open('count-vectorizer.pkl','rb'))
@@ -19,5 +20,5 @@ def predict():
     return render_template('index.html', prediction=my_prediction)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
 
